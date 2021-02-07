@@ -18,29 +18,29 @@
     </UserControl.Resources>
 
     <Grid>
-        <xcad:DockingManager Grid.Row="1"
+        <avalondock:DockingManager Grid.Row="1"
                              DocumentsSource="{Binding DockingViewModels}"
                              AnchorablesSource="{Binding Anchorables}">
 
-            <xcad:DockingManager.Resources>
+            <avalondock:DockingManager.Resources>
 
                 <!-- add views for specific ViewModels -->
                 <DataTemplate DataType="{x:Type consoleViewModels:VuConsoleViewModel}">
                     <consolesControls:VuConsoleControl />
                 </DataTemplate>
 
-            </xcad:DockingManager.Resources>
+            </avalondock:DockingManager.Resources>
 
-            <xcad:DockingManager.LayoutItemContainerStyle>
+            <avalondock:DockingManager.LayoutItemContainerStyle>
                 <!-- you can add additional bindings from the layoutitem to the DockWindowViewModel -->
-                <Style TargetType="{x:Type xcad:LayoutItem}" >
+                <Style TargetType="{x:Type LayoutItem}" >
                     <Setter Property="Title" Value="{Binding Model.Title}" />
                     <Setter Property="CloseCommand" Value="{Binding Model.CloseCommand}" />
                     <Setter Property="CanClose" Value="{Binding Model.CanClose}" />
                     <Setter Property="IsSelected" Value="{Binding Model.IsSelected, Mode=TwoWay}" />
                 </Style>
-            </xcad:DockingManager.LayoutItemContainerStyle>
+            </avalondock:DockingManager.LayoutItemContainerStyle>
 
-        </xcad:DockingManager>
+        </avalondock:DockingManager>
     </Grid>
 </UserControl>

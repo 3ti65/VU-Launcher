@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Text;
 using System.Windows.Input;
 using VULauncher.Commands;
-using Xceed.Wpf.AvalonDock.Controls;
 
 namespace VULauncher.ViewModels.Common
 {

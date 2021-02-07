@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Windows;
 using VULauncher.Commands;
 using VULauncher.Models.Config;
 using VULauncher.Models.Repositories.ServerFilesManagers;
-using VULauncher.Util;
 using VULauncher.ViewModels.Common;
 using VULauncher.ViewModels.ConsoleViewModels;
 using VULauncher.ViewModels.Enums;
@@ -21,10 +18,10 @@ namespace VULauncher.ViewModels
 {
     public class ConsolesViewModel : ViewModel
     {
-	    private static readonly string _vuExe = "vu.exe";
-	    private static readonly string _vuCom = "vu.com";
-	    private static readonly string _vuClient = "Client";
-	    private static readonly string _vuServer = "Server";
+        private static readonly string _vuExe = "vu.exe";
+        private static readonly string _vuCom = "vu.com";
+        private static readonly string _vuClient = "Client";
+        private static readonly string _vuServer = "Server";
         private VuConsoleViewModel _activeConsoleViewModel;
 
         public ObservableCollection<DockableDocumentViewModel> DockingViewModels { get; set; } = new ObservableCollection<DockableDocumentViewModel>();
@@ -63,7 +60,7 @@ namespace VULauncher.ViewModels
 
             if (startupType == StartupType.Server)
             {
-	            OverwriteTxtFiles((ServerPresetItem)launchPresetItem);
+                OverwriteTxtFiles((ServerPresetItem)launchPresetItem);
             }
 
             new Thread(() => CreateVuConsoleViewModelAndGameProcess(startupType, launchPresetItem.Name, concatenatedLaunchParameters, openConsoleInsideLauncher)).Start();
@@ -86,7 +83,7 @@ namespace VULauncher.ViewModels
 
             if (attach)
             {
-	            vuConsoleViewModel.CloseCommand = new RelayCommand(x =>
+                vuConsoleViewModel.CloseCommand = new RelayCommand(x =>
                 {
                     if (vuConsoleViewModel.GameProcess != null && !vuConsoleViewModel.GameProcess.IsAlive())
                     {
@@ -98,7 +95,10 @@ namespace VULauncher.ViewModels
 
                         if (result == MessageBoxResult.Yes)
                         {
-                            Kill(vuConsoleViewModel);
+                            Application.Current.Dispatcher.Invoke(() =>
+                            {
+                                Kill(vuConsoleViewModel);
+                            });
                         }
                     }
                 });
@@ -166,7 +166,7 @@ namespace VULauncher.ViewModels
             if (vuConsoleViewModel != null)
             {
                 Remove(vuConsoleViewModel);
-				vuConsoleViewModel.GameProcess.Kill();
+                vuConsoleViewModel.GameProcess.Kill();
             }
         }
     }
